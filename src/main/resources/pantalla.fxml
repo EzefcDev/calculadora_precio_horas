@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.schoolofliberation.controllers.CalculadoraController">
+   <children>
+      <Button layoutX="229.0" layoutY="361.0" mnemonicParsing="false" onAction="#calculate" text="Calcular" />
+      <Label layoutX="74.0" layoutY="83.0" text="Cargar dolar hoy" />
+      <TextField fx:id="priceText" layoutX="189.0" layoutY="79.0" />
+      <Label fx:id="messageErrorPrice" layoutX="191.0" layoutY="104.0" textFill="#ff0d0d" />
+      <Label layoutX="75.0" layoutY="151.0" text="Hora de pieza" />
+      <TextField fx:id="inputHour" layoutX="190.0" layoutY="147.0" prefHeight="17.0" prefWidth="32.0" />
+      <Label layoutX="199.0" layoutY="130.0" text="hh" />
+      <TextField fx:id="inputMinute" layoutX="242.0" layoutY="147.0" prefHeight="17.0" prefWidth="32.0" />
+      <Label layoutX="230.0" layoutY="151.0" text=":" />
+      <Label layoutX="248.0" layoutY="130.0" text="mm" />
+      <TextField fx:id="inputSecond" layoutX="293.0" layoutY="147.0" prefHeight="17.0" prefWidth="32.0" />
+      <Label layoutX="281.0" layoutY="151.0" text=":" />
+      <Label layoutX="304.0" layoutY="130.0" text="ss" />
+      <Button layoutX="369.0" layoutY="147.0" mnemonicParsing="false" onAction="#addTime" text="+" />
+      <Label fx:id="messageErrorHour" layoutX="186.0" layoutY="183.0" textFill="#ff0d0d" />
+      <VBox fx:id="vbox" layoutX="75.0" layoutY="183.0" prefHeight="146.0" prefWidth="99.0" />
+      <Label fx:id="labelHourFull" layoutX="393.0" layoutY="221.0" prefHeight="35.0" prefWidth="173.0" />
+      <Label fx:id="labelPrice" layoutX="393.0" layoutY="260.0" prefHeight="35.0" prefWidth="173.0" />
+      <Button layoutX="525.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveProyect" text="Guardar" />
+      <Label layoutX="71.0" layoutY="39.0" text="Nombre proyecto" />
+      <TextField fx:id="nameText" layoutX="190.0" layoutY="35.0" />
+      <Label fx:id="messageErrorName" layoutX="190.0" layoutY="60.0" textFill="#ff0d0d" />
+      <Button layoutX="438.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancel" text="Cancelar" />
+   </children>
+</Pane>
