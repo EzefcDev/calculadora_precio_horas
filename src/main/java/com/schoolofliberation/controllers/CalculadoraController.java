@@ -14,7 +14,12 @@ import javafx.scene.layout.VBox;
 
 public class CalculadoraController {
 
-    private RegistroController registroController = new RegistroController();
+    private RegistroController registroController;
+
+    @FXML
+    public void initialize() {
+        registroController = App.getRegistroController();
+    }
 
     @FXML
     private Label messageErrorHour;

@@ -20,9 +20,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         scene = new Scene(loadFXML(Paths.RUTA_REGISTRO));
-        if ("/registro".equals(Paths.RUTA_REGISTRO)) {
-            registroController.initialize();
-        }
         stage.setScene(scene);
         stage.setTitle("Precio-Horas");
         stage.show();
@@ -42,6 +39,10 @@ public class App extends Application {
         }
         return parent;
     }
+
+    public static RegistroController getRegistroController() {
+        return registroController;
+    }    
 
     public static void main(String[] args) {
         launch(args);

@@ -7,6 +7,8 @@ import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProyectEntity;
 import com.schoolofliberation.utils.Paths;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -33,6 +35,8 @@ public class RegistroController {
     @FXML
     private TableView<ProyectEntity> tableRegister;
 
+    private ObservableList<ProyectEntity> projectList = FXCollections.observableArrayList();
+
     @FXML
     void newRegister(ActionEvent event) {
         try {
@@ -47,7 +51,7 @@ public class RegistroController {
         columnName.setCellValueFactory(new PropertyValueFactory<>("nameProyect"));
         columnPrice.setCellValueFactory(new PropertyValueFactory<>("priceProyect"));
         columnDuration.setCellValueFactory(new PropertyValueFactory<>("time"));
-        columnPriceInDollars.setCellValueFactory(new PropertyValueFactory<>("dollarPrice"));
+        columnPriceInDollars.setCellValueFactory(new PropertyValueFactory<>("priceInDollars"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
     }
 
