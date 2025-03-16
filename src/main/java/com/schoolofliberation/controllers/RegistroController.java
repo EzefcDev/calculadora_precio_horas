@@ -2,13 +2,13 @@ package com.schoolofliberation.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.schoolofliberation.App;
-import com.schoolofliberation.entities.ProyectEntity;
+import com.schoolofliberation.entities.ProjectEntity;
+import com.schoolofliberation.services.ProjectService;
 import com.schoolofliberation.utils.Paths;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -18,24 +18,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class RegistroController {
 
     @FXML
-    private TableColumn<ProyectEntity, LocalDate> columnDate;
+    private TableColumn<ProjectEntity, LocalDate> columnDate;
 
     @FXML
-    private TableColumn<ProyectEntity, String> columnName;
+    private TableColumn<ProjectEntity, String> columnName;
 
     @FXML
-    private TableColumn<ProyectEntity, Double> columnPrice;
+    private TableColumn<ProjectEntity, Double> columnPrice;
 
     @FXML
-    private TableColumn<ProyectEntity, Integer> columnPriceInDollars;
+    private TableColumn<ProjectEntity, Integer> columnPriceInDollars;
 
     @FXML
-    private TableColumn<ProyectEntity, Double> columnDuration;
+    private TableColumn<ProjectEntity, Double> columnDuration;
 
     @FXML
-    private TableView<ProyectEntity> tableRegister;
-
-    private ObservableList<ProyectEntity> projectList = FXCollections.observableArrayList();
+    private TableView<ProjectEntity> tableRegister;
 
     @FXML
     void newRegister(ActionEvent event) {
@@ -53,10 +51,14 @@ public class RegistroController {
         columnDuration.setCellValueFactory(new PropertyValueFactory<>("time"));
         columnPriceInDollars.setCellValueFactory(new PropertyValueFactory<>("priceInDollars"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
+        getListProject();
     }
 
-    public void addProject(ProyectEntity projectEntity) {
-        tableRegister.getItems().add(projectEntity);
+    public void getListProject() {
+        List<ProjectEntity> projectEntities = ProjectService.getAllProjectEntity();
+        for (ProjectEntity projectEntity : projectEntities) {
+            tableRegister.getItems().add(projectEntity);
+        }
     }
 
 }

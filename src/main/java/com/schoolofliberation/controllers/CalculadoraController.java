@@ -3,7 +3,8 @@ package com.schoolofliberation.controllers;
 import java.io.IOException;
 
 import com.schoolofliberation.App;
-import com.schoolofliberation.entities.ProyectEntity;
+import com.schoolofliberation.entities.ProjectEntity;
+import com.schoolofliberation.services.ProjectService;
 import com.schoolofliberation.utils.Paths;
 
 import javafx.event.ActionEvent;
@@ -13,13 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class CalculadoraController {
-
-    private RegistroController registroController;
-
-    @FXML
-    public void initialize() {
-        registroController = App.getRegistroController();
-    }
 
     @FXML
     private Label messageErrorHour;
@@ -58,41 +52,20 @@ public class CalculadoraController {
     int addMinute = 0;
     int addSecond = 0;
 
-    ProyectEntity proyectEntity;
+    ProjectEntity projectEntity;
 
     @FXML
     void addTime(ActionEvent event) {
         int hour = inputHour.getText().isBlank() ? 0 : Integer.parseInt(inputHour.getText());
         int minute = inputMinute.getText().isBlank() ? 0 : Integer.parseInt(inputMinute.getText());
         int second = inputSecond.getText().isBlank() ? 0 : Integer.parseInt(inputSecond.getText());
-        addHour = addHour + hour;
-        addMinute = addMinute + minute;
-        addSecond = addSecond + second;
-        if (addSecond >= 60) {
-            int resultado = addSecond / 60;
-            int sobrante = addSecond % 60;
-            addMinute = addMinute + resultado;
-            addSecond = 0;
-            addSecond = addSecond + sobrante;
-        }
-        if (addMinute >= 60) {
-            int resultadoMinute = addMinute / 60;
-            int sobranteMinute = addMinute % 60;
-            addHour = addHour + resultadoMinute;
-            addMinute = 0;
-            addMinute = addMinute + sobranteMinute;
-        }
-        Label label = new Label(hour + ":" + minute + ":" + second);
-        vbox.getChildren().add(label);
+        calculateTime(hour, minute, second);
         cleanInputsTime();
     }
-
+        
     @FXML
     void calculate(ActionEvent event) {
-        if (!priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
-            if (proyectEntity == null) {
-                proyectEntity = new ProyectEntity();
-            }
+        if (!nameText.getText().isBlank() && !priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
             setMessage();
             int dollar = Integer.parseInt(priceText.getText());
             Double hourFull = (double) addHour;
@@ -100,9 +73,7 @@ public class CalculadoraController {
             Double secondFull = (double) addSecond;
             Double time = hourFull + (minuteFull / 60) + (secondFull / 3600);
             Double price = (dollar * time);
-            proyectEntity.setPriceInDollars(dollar);
-            proyectEntity.setPriceProyect(price);
-            proyectEntity.setTime(time);
+            projectEntity = ProjectService.setProjectEntity(nameText.getText(), dollar, price, time);
             labelPrice.setText("Precio total : $" + price);
             labelHourFull.setText("Horas totales: " + addHour + ":" + addMinute + ":" + addSecond);
         } else {
@@ -113,12 +84,9 @@ public class CalculadoraController {
     @FXML
     void saveProyect(ActionEvent event) {
         if (!nameText.getText().isBlank() && !priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
-            if (proyectEntity == null) {
-                proyectEntity = new ProyectEntity();
-            }
             try {
-                proyectEntity.setNameProyect(nameText.getText());
-                registroController.addProject(proyectEntity);
+                //TODO:Hacer una advertencia por si se cambia algun dato
+                ProjectService.saveProjectEntity(projectEntity);
                 App.setRoot(Paths.RUTA_REGISTRO);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -149,5 +117,26 @@ public class CalculadoraController {
                 nameText.getText().isBlank() ? "El nombre del proyecto es requerido para guardar el registro" : "");
         messageErrorHour.setText(vbox.getChildren().isEmpty() ? "Debe ingresar al menos una hora" : "");
     }
-
+    
+    private void calculateTime(int hour, int minute, int second) {
+        addHour = addHour + hour;
+        addMinute = addMinute + minute;
+        addSecond = addSecond + second;
+        if (addSecond >= 60) {
+            int resultado = addSecond / 60;
+            int sobrante = addSecond % 60;
+            addMinute = addMinute + resultado;
+            addSecond = 0;
+            addSecond = addSecond + sobrante;
+        }
+        if (addMinute >= 60) {
+            int resultadoMinute = addMinute / 60;
+            int sobranteMinute = addMinute % 60;
+            addHour = addHour + resultadoMinute;
+            addMinute = 0;
+            addMinute = addMinute + sobranteMinute;
+        }
+        Label label = new Label(hour + ":" + minute + ":" + second);
+        vbox.getChildren().add(label);
+    }
 }

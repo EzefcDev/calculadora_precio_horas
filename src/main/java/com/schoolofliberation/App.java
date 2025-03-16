@@ -2,7 +2,6 @@ package com.schoolofliberation;
 
 import java.io.IOException;
 
-import com.schoolofliberation.controllers.CalculadoraController;
 import com.schoolofliberation.controllers.RegistroController;
 import com.schoolofliberation.utils.Paths;
 
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 public class App extends Application {
     private static Scene scene;
     private static RegistroController registroController;
-    private static CalculadoraController calculadoraController;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -34,9 +32,7 @@ public class App extends Application {
         Parent parent = fxmlLoader.load();
         if (fxml.equals(Paths.RUTA_REGISTRO)) {
             registroController = fxmlLoader.getController();
-        } else {
-            calculadoraController = fxmlLoader.getController();
-        }
+        } 
         return parent;
     }
 

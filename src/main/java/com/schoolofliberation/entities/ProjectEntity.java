@@ -6,12 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProyectEntity {
+@ToString
+public class ProjectEntity {
 
     private Long id;
 
