@@ -59,8 +59,8 @@ public class EditarController {
     @FXML
     void saveProyect(ActionEvent event) {
         try {
-            projectEntityUpdate.setPriceInDollars(dollar);
-            projectEntityUpdate.setPriceProyect(price);
+            projectEntityUpdate.setPriceOfDollar(dollar);
+            projectEntityUpdate.setProjectPrice(price);
             ProjectService.updateProjectEntity(projectEntityUpdate);
             App.setRoot(Paths.RUTA_REGISTRO, null);
         } catch (Exception e) {
@@ -70,9 +70,9 @@ public class EditarController {
 
     public void init(ProjectEntity projectEntity) {
         projectEntityUpdate = projectEntity;
-        labelProjectName.setText(projectEntity.getNameProyect());
+        labelProjectName.setText(projectEntity.getProjectName());
         labelHourFull.setText(String.valueOf(projectEntity.getTime()));
-        time = projectEntity.getTime();
+        time = projectEntity.getTimeInDouble();
     }
 
 }

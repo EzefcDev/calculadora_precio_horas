@@ -17,13 +17,15 @@ public class ProjectEntity {
 
     private Long id;
 
-    private String nameProyect;
+    private String projectName;
 
-    private Integer priceInDollars;
+    private Integer priceOfDollar;
 
-    private Double time;
+    private String time;
 
-    private Double priceProyect;
+    private Double timeInDouble;
+
+    private Double projectPrice;
 
     private LocalDate createDate;
 

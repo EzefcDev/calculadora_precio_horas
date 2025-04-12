@@ -13,13 +13,14 @@ public class ProjectService {
 
     static List<ProjectEntity> projectEntities = new ArrayList<>();
     
-    public static ProjectEntity setProjectEntity(final String name, final int dollar, final double price, final double time) {
+    public static ProjectEntity setProjectEntity(final String name, final int dollar, final double price, final double time, final String timeString) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(projectEntities.size() + 1L);
-        projectEntity.setNameProyect(name);
-        projectEntity.setPriceInDollars(dollar);
-        projectEntity.setPriceProyect(price);
-        projectEntity.setTime(time);
+        projectEntity.setProjectName(name);
+        projectEntity.setPriceOfDollar(dollar);
+        projectEntity.setProjectPrice(price);
+        projectEntity.setTimeInDouble(time);
+        projectEntity.setTime(timeString);
         projectEntity.setCreateDate(LocalDate.now());
         log.info("Proyecto creado: " + projectEntity.toString());
         return projectEntity;
@@ -38,8 +39,8 @@ public class ProjectService {
     public static void updateProjectEntity(final ProjectEntity projectEntityUpdate) {
         for (ProjectEntity projectEntity : projectEntities) {
             if (projectEntity.getId().equals(projectEntityUpdate.getId())) {
-                projectEntity.setPriceProyect(projectEntityUpdate.getPriceProyect());
-                projectEntity.setPriceInDollars(projectEntityUpdate.getPriceInDollars());
+                projectEntity.setProjectPrice(projectEntityUpdate.getProjectPrice());
+                projectEntity.setPriceOfDollar(projectEntityUpdate.getPriceOfDollar());
                 projectEntity.setModificateDate(LocalDate.now());
             }
         }

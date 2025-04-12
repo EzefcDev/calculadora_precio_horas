@@ -73,9 +73,10 @@ public class CalculadoraController {
             Double secondFull = (double) addSecond;
             Double time = hourFull + (minuteFull / 60) + (secondFull / 3600);
             Double price = (dollar * time);
-            projectEntity = ProjectService.setProjectEntity(nameText.getText(), dollar, price, time);
+            String timeString = addHour + ":" + addMinute + ":" + addSecond;
+            projectEntity = ProjectService.setProjectEntity(nameText.getText(), dollar, price, time, timeString);
             labelPrice.setText("Precio total : $" + price);
-            labelHourFull.setText("Horas totales: " + addHour + ":" + addMinute + ":" + addSecond);
+            labelHourFull.setText("Horas totales: " + timeString);
         } else {
             setMessage();
         }

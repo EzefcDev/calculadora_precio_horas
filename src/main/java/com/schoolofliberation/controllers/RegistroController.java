@@ -33,7 +33,7 @@ public class RegistroController {
     private TableColumn<ProjectEntity, Integer> columnPriceInDollars;
 
     @FXML
-    private TableColumn<ProjectEntity, Double> columnDuration;
+    private TableColumn<ProjectEntity, String> columnDuration;
 
     @FXML
     private TableView<ProjectEntity> tableRegister;
@@ -67,10 +67,10 @@ public class RegistroController {
 
     @FXML
     public void initialize() {
-        columnName.setCellValueFactory(new PropertyValueFactory<>("nameProyect"));
-        columnPrice.setCellValueFactory(new PropertyValueFactory<>("priceProyect"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<>("projectPrice"));
         columnDuration.setCellValueFactory(new PropertyValueFactory<>("time"));
-        columnPriceInDollars.setCellValueFactory(new PropertyValueFactory<>("priceInDollars"));
+        columnPriceInDollars.setCellValueFactory(new PropertyValueFactory<>("priceOfDollar"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("createDate"));
         getListProject();
     }
