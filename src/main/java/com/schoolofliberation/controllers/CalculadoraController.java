@@ -87,7 +87,7 @@ public class CalculadoraController {
             try {
                 //TODO:Hacer una advertencia por si se cambia algun dato
                 ProjectService.saveProjectEntity(projectEntity);
-                App.setRoot(Paths.RUTA_REGISTRO);
+                App.setRoot(Paths.RUTA_REGISTRO, null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,7 +99,7 @@ public class CalculadoraController {
     @FXML
     void cancel(ActionEvent event) {
         try {
-            App.setRoot(Paths.RUTA_REGISTRO);
+            App.setRoot(Paths.RUTA_REGISTRO, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
