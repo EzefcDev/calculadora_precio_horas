@@ -3,10 +3,12 @@ package com.schoolofliberation.controllers;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProjectEntity;
 import com.schoolofliberation.services.ProjectService;
+import com.schoolofliberation.utils.AlertDialog;
 import com.schoolofliberation.utils.Paths;
 
 import javafx.collections.ObservableList;
@@ -50,9 +52,13 @@ public class RegistroController {
     @FXML
     void editRegister(ActionEvent event) {
         try {
-            App.setRoot(Paths.RUTA_EDITAR, projectEntity);
+            if (Objects.isNull(projectEntity.getId())) {
+                AlertDialog.messageWarning("Se debe seleccionar un registro");
+            } else {
+                App.setRoot(Paths.RUTA_EDITAR, projectEntity);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertDialog.messageError(e.getMessage());
         }
     }
 
@@ -61,7 +67,7 @@ public class RegistroController {
         try {
             App.setRoot(Paths.RUTA_PANTALLA, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertDialog.messageError(e.getMessage());
         }
     }
 

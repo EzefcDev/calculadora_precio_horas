@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProjectEntity;
 import com.schoolofliberation.services.ProjectService;
+import com.schoolofliberation.utils.AlertDialog;
 import com.schoolofliberation.utils.Paths;
 
 import javafx.event.ActionEvent;
@@ -90,7 +91,7 @@ public class CalculadoraController {
                 ProjectService.saveProjectEntity(projectEntity);
                 App.setRoot(Paths.RUTA_REGISTRO, null);
             } catch (IOException e) {
-                e.printStackTrace();
+                AlertDialog.messageError(e.getMessage());
             }
         } else {
             setMessage();
@@ -102,7 +103,7 @@ public class CalculadoraController {
         try {
             App.setRoot(Paths.RUTA_REGISTRO, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertDialog.messageError(e.getMessage());
         }
     }
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProjectEntity;
 import com.schoolofliberation.services.ProjectService;
+import com.schoolofliberation.utils.AlertDialog;
 import com.schoolofliberation.utils.Paths;
 
 import javafx.event.ActionEvent;
@@ -52,7 +53,7 @@ public class EditarController {
         try {
             App.setRoot(Paths.RUTA_REGISTRO, null);
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertDialog.messageError(e.getMessage());
         }
     }
 
@@ -64,7 +65,7 @@ public class EditarController {
             ProjectService.updateProjectEntity(projectEntityUpdate);
             App.setRoot(Paths.RUTA_REGISTRO, null);
         } catch (Exception e) {
-            // TODO: handle exception
+            AlertDialog.messageError(e.getMessage());
         }
     }
 
