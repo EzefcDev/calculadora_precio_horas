@@ -60,13 +60,24 @@ public class EditarController {
     @FXML
     void saveProyect(ActionEvent event) {
         try {
-            projectEntityUpdate.setPriceOfDollar(dollar);
-            projectEntityUpdate.setProjectPrice(price);
-            ProjectService.updateProjectEntity(projectEntityUpdate);
-            App.setRoot(Paths.RUTA_REGISTRO, null);
+            if (changesBeforeSave()) {
+                AlertDialog.messageWarning("Hay cambios en las entradas");
+            } else {
+                projectEntityUpdate.setPriceOfDollar(dollar);
+                projectEntityUpdate.setProjectPrice(price);
+                ProjectService.updateProjectEntity(projectEntityUpdate);
+                App.setRoot(Paths.RUTA_REGISTRO, null);
+            }
         } catch (Exception e) {
             AlertDialog.messageError(e.getMessage());
         }
+    }
+
+    private boolean changesBeforeSave() {
+        if ( dollar != Integer.parseInt(priceText.getText())) {
+            return true ;
+        }
+        return false;
     }
 
     public void init(ProjectEntity projectEntity) {

@@ -87,15 +87,25 @@ public class CalculadoraController {
     void saveProyect(ActionEvent event) {
         if (!nameText.getText().isBlank() && !priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
             try {
-                //TODO:Hacer una advertencia por si se cambia algun dato
-                ProjectService.saveProjectEntity(projectEntity);
-                App.setRoot(Paths.RUTA_REGISTRO, null);
+                if (changesBeforeSave()) {
+                    AlertDialog.messageWarning("Hay cambios en las entradas");
+                } else {
+                    ProjectService.saveProjectEntity(projectEntity);
+                    App.setRoot(Paths.RUTA_REGISTRO, null);
+                }
             } catch (IOException e) {
                 AlertDialog.messageError(e.getMessage());
             }
         } else {
             setMessage();
         }
+    }
+
+    private boolean changesBeforeSave() {
+        if (projectEntity.getProjectName() != nameText.getText() && projectEntity.getPriceOfDollar() != Integer.parseInt(priceText.getText())) {
+            return true ;
+        }
+        return false;
     }
 
     @FXML
