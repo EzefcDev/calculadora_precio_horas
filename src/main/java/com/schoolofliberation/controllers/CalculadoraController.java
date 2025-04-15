@@ -66,21 +66,26 @@ public class CalculadoraController {
         
     @FXML
     void calculate(ActionEvent event) {
-        if (!nameText.getText().isBlank() && !priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
-            setMessage();
-            int dollar = Integer.parseInt(priceText.getText());
-            Double hourFull = (double) addHour;
-            Double minuteFull = (double) addMinute;
-            Double secondFull = (double) addSecond;
-            Double time = hourFull + (minuteFull / 60) + (secondFull / 3600);
-            Double price = (dollar * time);
-            String timeString = addHour + ":" + addMinute + ":" + addSecond;
-            projectEntity = ProjectService.setProjectEntity(nameText.getText(), dollar, price, time, timeString);
-            labelPrice.setText("Precio total : $" + price);
-            labelHourFull.setText("Horas totales: " + timeString);
-        } else {
-            setMessage();
+        try {
+            if (!nameText.getText().isBlank() && !priceText.getText().isBlank() && !vbox.getChildren().isEmpty()) {
+                setMessage();
+                int dollar = Integer.parseInt(priceText.getText());
+                Double hourFull = (double) addHour;
+                Double minuteFull = (double) addMinute;
+                Double secondFull = (double) addSecond;
+                Double time = hourFull + (minuteFull / 60) + (secondFull / 3600);
+                Double price = (dollar * time);
+                String timeString = addHour + ":" + addMinute + ":" + addSecond;
+                projectEntity = ProjectService.setProjectEntity(nameText.getText(), dollar, price, time, timeString);
+                labelPrice.setText("Precio total : $" + price);
+                labelHourFull.setText("Horas totales: " + timeString);
+            } else {
+                setMessage();
+            }       
+        } catch (Exception e) {
+            AlertDialog.messageError(e.getMessage());
         }
+        
     }
 
     @FXML

@@ -39,13 +39,18 @@ public class EditarController {
 
     @FXML
     void calculate(ActionEvent event) {
-        if (!priceText.getText().isBlank()) {
-            dollar = Integer.parseInt(priceText.getText());
-            price = (dollar * time);
-            labelTotalPrice.setText("Precio total: " + price);
-        } else {
-            messageErrorPrice.setText(priceText.getText().isBlank() ? "El valor del dolar es requerido" : "");
+        try {
+            if (!priceText.getText().isBlank()) {
+                dollar = Integer.parseInt(priceText.getText());
+                price = (dollar * time);
+                labelTotalPrice.setText("Precio total: " + price);
+            } else {
+                messageErrorPrice.setText(priceText.getText().isBlank() ? "El valor del dolar es requerido" : "");
+            }
+        } catch (Exception e) {
+            AlertDialog.messageError(e.getMessage());
         }
+        
     }
 
     @FXML
