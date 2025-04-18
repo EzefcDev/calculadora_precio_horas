@@ -1,6 +1,6 @@
 package com.schoolofliberation.entities;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,12 +23,16 @@ public class ProjectEntity {
 
     private String time;
 
+    private String description;
+
     private Double timeInDouble;
 
     private Double projectPrice;
 
-    private LocalDate createDate;
+    private Timestamp createDate;
 
-    private LocalDate modificateDate;
+    private Timestamp modificateDate;
+    
+    private Timestamp deleteDate;
 
 }

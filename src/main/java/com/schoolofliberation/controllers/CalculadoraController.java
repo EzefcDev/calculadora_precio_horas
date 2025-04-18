@@ -1,6 +1,7 @@
 package com.schoolofliberation.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProjectEntity;
@@ -98,7 +99,7 @@ public class CalculadoraController {
                     ProjectService.saveProjectEntity(projectEntity);
                     App.setRoot(Paths.RUTA_REGISTRO, null);
                 }
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 AlertDialog.messageError(e.getMessage());
             }
         } else {

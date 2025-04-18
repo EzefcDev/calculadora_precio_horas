@@ -2,12 +2,11 @@ package com.schoolofliberation.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 import com.schoolofliberation.App;
 import com.schoolofliberation.entities.ProjectEntity;
-import com.schoolofliberation.services.ProjectService;
+import com.schoolofliberation.repositories.ProjectRepository;
 import com.schoolofliberation.utils.AlertDialog;
 import com.schoolofliberation.utils.Paths;
 
@@ -82,8 +81,8 @@ public class RegistroController {
     }
 
     public void getListProject() {
-        List<ProjectEntity> projectEntities = ProjectService.getAllProjectEntity();
-        for (ProjectEntity projectEntity : projectEntities) {
+        ProjectRepository projectRepository = new ProjectRepository();
+        for (ProjectEntity projectEntity : projectRepository.findAll()) {
             tableRegister.getItems().add(projectEntity);
         }
     }
